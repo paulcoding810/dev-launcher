@@ -59,7 +59,8 @@ class ViewModel : ViewModel() {
         }
     }
 
-    private fun getAllApps() = buildList {
+    private fun getAllApps() = buildSet {
+        val packageNameSet = mutableSetOf<String>()
         userManager.userProfiles.forEach { profile ->
             val activityList = launcherApps.getActivityList(null, profile)
             activityList.forEach {
@@ -68,7 +69,11 @@ class ViewModel : ViewModel() {
                 val icon = applicationInfo.loadIcon(packageManager)
                 val packageName = applicationInfo.packageName
                 val isSystem = applicationInfo.isSystemApp()
-                add(AppInfo(name, packageName, icon, isSystem))
+
+                if (!packageNameSet.contains(packageName)) {
+                    packageNameSet.add(packageName)
+                    add(AppInfo(name, packageName, icon, isSystem))
+                }
             }
         }
     }.sortedBy { it.name }
