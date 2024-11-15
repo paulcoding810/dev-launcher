@@ -8,6 +8,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.paulcoding.devlauncher.ui.page.ViewModel
+import com.paulcoding.devlauncher.ui.page.home.apps.AppsContent
 
 @Composable
 fun HomePage(viewModel: ViewModel, navToSettings: () -> Unit) {
