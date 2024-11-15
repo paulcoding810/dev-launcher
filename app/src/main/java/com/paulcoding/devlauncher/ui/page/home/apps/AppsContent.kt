@@ -1,6 +1,5 @@
 package com.paulcoding.devlauncher.ui.page.home.apps
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.VerticalPager
@@ -15,11 +14,10 @@ import com.paulcoding.devlauncher.ui.page.ViewModel
 @Composable
 fun AppsContent(viewModel: ViewModel) {
     val uiState by viewModel.uiState.collectAsState()
+    val pagerState = rememberPagerState { 2 }
+
     VerticalPager(
-        state = rememberPagerState(
-            initialPage = 0,
-            pageCount = { 2 }
-        )
+        state = pagerState
     ) { page ->
         when (page) {
             0 -> MostUsedApps(
@@ -31,7 +29,8 @@ fun AppsContent(viewModel: ViewModel) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 8.dp),
-                apps = uiState.apps
+                apps = uiState.apps,
+                focused = pagerState.currentPage == 1
             )
         }
     }
