@@ -24,7 +24,7 @@ android {
             resValue("string", "app_name", "Dev Launcher (Dev)")
         }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
