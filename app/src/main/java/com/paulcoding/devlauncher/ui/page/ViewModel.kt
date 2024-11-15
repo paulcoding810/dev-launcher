@@ -45,7 +45,7 @@ class ViewModel : ViewModel() {
 
     data class UiState(
         val ip: String = "",
-        val apps: List<AppItem> = listOf()
+        val apps: List<AppInfo> = listOf()
     )
 
     fun getAllAppsByCategory() {
@@ -68,8 +68,7 @@ class ViewModel : ViewModel() {
                 val icon = applicationInfo.loadIcon(packageManager)
                 val packageName = applicationInfo.packageName
                 val isSystem = applicationInfo.isSystemApp()
-                log("$packageName $isSystem", name)
-                add(AppItem(name, packageName, icon))
+                add(AppInfo(name, packageName, icon, isSystem))
             }
         }
     }.sortedBy { it.name }
@@ -82,8 +81,9 @@ class ViewModel : ViewModel() {
     }
 }
 
-data class AppItem(
+data class AppInfo(
     val name: String,
     val packageName: String,
     val icon: Drawable,
+    val isSystem: Boolean,
 )
