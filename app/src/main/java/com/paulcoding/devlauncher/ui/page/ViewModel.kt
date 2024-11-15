@@ -86,4 +86,11 @@ data class AppInfo(
     val packageName: String,
     val icon: Drawable,
     val isSystem: Boolean,
-)
+) {
+    fun open() {
+        packageManager.getLaunchIntentForPackage(packageName)?.let {
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            appContext.startActivity(it)
+        }
+    }
+}
